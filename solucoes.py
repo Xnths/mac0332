@@ -15,8 +15,47 @@ def sao_anagramas(string1, string2):
 
 
 def cifra_de_cesar(texto, deslocamento):
-    # TODO: Implementar lógica
+    def cifra_de_cesar(texto, deslocamento):
+    """
+    Criptografa ou descriptografa um texto usando a Cifra de César.
+
+    Argumentos:
+    texto (str): A string de entrada a ser cifrada.
+    deslocamento (int): O número de posições para deslocar cada letra.
+                       Pode ser positivo (para frente) ou negativo (para trás).
+
+    Retorna:
+    str: O texto cifrado ou descriptografado.
+    """
+    resultado = ""
+
+    # Itera sobre cada caractere no texto de entrada
+    for char in texto:
+        # Verifica se o caractere é uma letra maiúscula
+        if 'A' <= char <= 'Z':
+            # Calcula o novo código ASCII com base no deslocamento
+            # ord('A') é 65.
+            # 1. (ord(char) - ord('A')) -> Posição da letra no alfabeto (0-25)
+            # 2. (... + deslocamento) -> Aplica o deslocamento
+            # 3. (... % 26) -> Garante que o valor "dê a volta" no alfabeto
+            # 4. (... + ord('A')) -> Converte de volta para o código ASCII
+            novo_codigo = (ord(char) - ord('A') + deslocamento) % 26 + ord('A')
+            resultado += chr(novo_codigo)
+            
+        # Verifica se o caractere é uma letra minúscula
+        elif 'a' <= char <= 'z':
+            # Lógica idêntica, mas usando a base 'a' (ASCII 97)
+            novo_codigo = (ord(char) - ord('a') + deslocamento) % 26 + ord('a')
+            resultado += chr(novo_codigo)
+            
+        # Se não for uma letra (número, espaço, pontuação), mantém o original
+        else:
+            resultado += char
+            
+    return resultado
+
     pass
+
 
 def encontrar_maior_palavra(frase):
     palavras = frase.split()
